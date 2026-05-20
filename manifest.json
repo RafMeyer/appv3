@@ -1,0 +1,9 @@
+{
+  "name": "StartBank",
+  "short_name": "StartBank",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#05070d",
+  "theme_color": "#0b0f17",
+  "icons": []
+}

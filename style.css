@@ -1,0 +1,325 @@
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, Inter, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: #05070d;
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(59,130,246,.28), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(124,58,237,.24), transparent 28%),
+    linear-gradient(180deg, #10131a, #05070d);
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 26px;
+  padding-bottom: 108px;
+}
+
+.screen.active {
+  display: block;
+  animation: fadeIn .22s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.brand {
+  text-align: center;
+  padding-top: 70px;
+}
+
+.brand h1 {
+  letter-spacing: 9px;
+  font-size: 30px;
+}
+
+.brand p, .small, .tiny {
+  color: rgba(255,255,255,.58);
+}
+
+.orb {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  margin: auto;
+  background: radial-gradient(circle, #60a5fa, #7c3aed, transparent 70%);
+  box-shadow: 0 0 60px #3b82f6;
+}
+
+.panel, .balance, .terminal, .list, .card {
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 28px;
+  padding: 24px;
+  margin-top: 22px;
+  backdrop-filter: blur(20px);
+}
+
+label {
+  display: block;
+  margin: 16px 0 8px;
+  color: rgba(255,255,255,.7);
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.35);
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  color: white;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  padding: 15px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-top: 18px;
+}
+
+.ghost {
+  background: rgba(255,255,255,.08);
+  margin: 0;
+}
+
+.mini {
+  margin: 0;
+  padding: 9px 13px;
+  font-size: 12px;
+}
+
+header, .card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.balance h1 {
+  font-size: 42px;
+  margin: 6px 0;
+}
+
+.balance span {
+  color: #7dd3fc;
+}
+
+.tabs, .quick, .theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.quick.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.theme-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.tabs button, .quick button, .theme-grid button {
+  background: rgba(255,255,255,.08);
+}
+
+.tabs button.active {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+
+.list div, .card-data div {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.list.tight {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  margin-top: 4px;
+}
+
+.iban {
+  font-size: 22px;
+  word-break: break-word;
+  letter-spacing: 1px;
+}
+
+.card {
+  height: 210px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card:active {
+  transform: scale(.985);
+}
+
+.big-card {
+  height: 235px;
+  animation: cardPop .35s ease;
+  box-shadow: 0 32px 80px rgba(0,0,0,.55);
+}
+
+@keyframes cardPop {
+  from { transform: scale(.94) rotateX(8deg); opacity: .4; }
+  to { transform: scale(1) rotateX(0); opacity: 1; }
+}
+
+.card.frozen::after {
+  content: "FROZEN";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(2,6,23,.68);
+  color: #93c5fd;
+  font-size: 28px;
+  letter-spacing: 8px;
+  font-weight: 800;
+}
+
+.card p {
+  letter-spacing: 6px;
+  color: rgba(255,255,255,.75);
+}
+
+.card h1 {
+  font-size: 60px;
+  margin: 35px 0 0;
+}
+
+.card span {
+  position: absolute;
+  bottom: 22px;
+  color: rgba(255,255,255,.65);
+}
+
+.start {
+  background:
+    radial-gradient(circle at 20% 20%, #ff3cac, transparent 36%),
+    radial-gradient(circle at 80% 30%, #00c6ff, transparent 38%),
+    #10131a;
+}
+
+.y {
+  background:
+    radial-gradient(circle at 75% 35%, rgba(34,197,94,.5), transparent 32%),
+    #030806;
+}
+
+.x {
+  background:
+    radial-gradient(circle at 60% 35%, rgba(0,174,255,.7), transparent 35%),
+    #061027;
+}
+
+.plus {
+  background: linear-gradient(135deg, #081d45, #020617);
+}
+
+.terminal {
+  color: #4ade80;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  line-height: 1.8;
+  box-shadow: 0 0 45px rgba(34,197,94,.12);
+}
+
+.wide {
+  width: 100%;
+}
+
+nav {
+  position: fixed;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  background: rgba(5,7,13,.76);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(22px);
+  padding: 8px;
+  border-radius: 26px;
+  z-index: 20;
+}
+
+nav button {
+  margin: 0;
+  padding: 12px 8px;
+  font-size: 12px;
+  background: rgba(255,255,255,.06);
+}
+
+#toast {
+  position: fixed;
+  left: 22px;
+  right: 22px;
+  bottom: 92px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 18px;
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: .25s ease;
+  z-index: 40;
+  text-align: center;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.theme-y .app {
+  background:
+    radial-gradient(circle at 70% 15%, rgba(34,197,94,.32), transparent 32%),
+    linear-gradient(180deg, #07100c, #020604);
+}
+
+body.theme-x .app {
+  background:
+    radial-gradient(circle at 50% 5%, rgba(0,174,255,.45), transparent 34%),
+    linear-gradient(180deg, #061327, #020617);
+}
+
+body.theme-plus .app {
+  background: linear-gradient(180deg, #061a3d, #020617);
+}
+
+body.theme-neon .app {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,60,172,.28), transparent 30%),
+    radial-gradient(circle at 80% 10%, rgba(0,198,255,.28), transparent 32%),
+    #05070d;
+}

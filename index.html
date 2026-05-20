@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f17" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="StartBank" />
+  <link rel="manifest" href="manifest.json" />
+  <title>StartBank</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="theme-neon">
+  <div class="app">
+
+    <section id="login" class="screen active">
+      <div class="brand">
+        <div class="orb"></div>
+        <h1>STARTBANK</h1>
+        <p>Luxembourg Digital Banking</p>
+      </div>
+
+      <div class="panel">
+        <label>Username</label>
+        <input id="username" placeholder="x@start.bank" />
+
+        <label>Secure access PIN</label>
+        <input id="pin" type="password" placeholder="••••••" />
+
+        <button onclick="openApp()">Enter StartBank</button>
+      </div>
+
+      <p class="small">Secure channel · Luxembourg node · STRTLU20</p>
+    </section>
+
+    <section id="home" class="screen">
+      <header>
+        <div>
+          <p class="tiny">Welcome back</p>
+          <h2 id="hello">StartBank</h2>
+        </div>
+        <button class="ghost" onclick="showScreen('settings')">⚙</button>
+      </header>
+
+      <div class="balance">
+        <p id="spaceLabel">Personal balance</p>
+        <h1 id="spaceBalance">€48,920.55</h1>
+        <span id="spaceSubtitle">+ €1,240 this month</span>
+      </div>
+
+      <div class="tabs">
+        <button id="tabPersonal" class="active" onclick="setSpace('personal')">Personal</button>
+        <button id="tabBusiness" onclick="setSpace('business')">Business</button>
+        <button id="tabVault" onclick="setSpace('vault')">Vault</button>
+      </div>
+
+      <div class="quick">
+        <button onclick="showScreen('send')">Send</button>
+        <button onclick="showScreen('receive')">Receive</button>
+        <button onclick="showScreen('cards')">Cards</button>
+      </div>
+
+      <div class="list">
+        <div><span>Apple Pay</span><b>- €24.90</b></div>
+        <div><span>SEPA Transfer</span><b>+ €2,500</b></div>
+        <div><span>Private Desk</span><b>Active</b></div>
+      </div>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="send" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('home')">←</button>
+        <h2>Send money</h2>
+        <span></span>
+      </header>
+
+      <div class="panel">
+        <label>Recipient IBAN</label>
+        <input placeholder="LU00 0000 0000 0000 0000" />
+        <label>Amount</label>
+        <input placeholder="€0.00" />
+        <button onclick="fakeDone('Transfer prepared')">Prepare SEPA transfer</button>
+      </div>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="receive" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('home')">←</button>
+        <h2>Receive</h2>
+        <span></span>
+      </header>
+
+      <div class="panel">
+        <h3>Your IBAN</h3>
+        <p class="iban">LU28 START 0000 4941 0001</p>
+        <p class="small">BIC/SWIFT: STRTLU20</p>
+        <button onclick="fakeDone('IBAN copied')">Copy IBAN</button>
+      </div>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="cards" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('home')">←</button>
+        <h2>Cards</h2>
+        <button class="ghost" onclick="openAddCard()">＋</button>
+      </header>
+
+      <div class="card-header-row">
+        <p class="small">Tap a card to open details</p>
+        <button class="mini" onclick="openAddCard()">Add card</button>
+      </div>
+
+      <div id="cardsList"></div>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="cardDetail" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('cards')">←</button>
+        <h2 id="detailTitle">Card</h2>
+        <span></span>
+      </header>
+
+      <div id="detailCard" class="card big-card">
+        <p>STARTBANK</p>
+        <h1 id="detailCardName">START</h1>
+        <span id="detailCardSub">Rose / Blue Mastercard</span>
+      </div>
+
+      <div class="panel card-data">
+        <div>
+          <span>Card number</span>
+          <b id="cardNumber">•••• •••• •••• ••••</b>
+        </div>
+        <div>
+          <span>Expiry</span>
+          <b id="cardExpiry">09/29</b>
+        </div>
+        <div>
+          <span>CVV</span>
+          <b id="cardCvv">•••</b>
+        </div>
+      </div>
+
+      <div class="quick two">
+        <button id="revealBtn" onclick="toggleCardNumber()">Reveal</button>
+        <button onclick="copyCard()">Copy</button>
+      </div>
+
+      <div class="quick two">
+        <button id="freezeBtn" onclick="toggleFreeze()">Freeze card</button>
+        <button onclick="fakeDone('Apple Pay setup opened')">Apple Pay</button>
+      </div>
+
+      <div class="panel">
+        <h3>Card controls</h3>
+        <div class="list tight">
+          <div><span>Online payments</span><b>ON</b></div>
+          <div><span>ATM withdrawals</span><b>OFF</b></div>
+          <div><span>Monthly limit</span><b>€5,000</b></div>
+        </div>
+      </div>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="addCard" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('cards')">←</button>
+        <h2>Add card</h2>
+        <span></span>
+      </header>
+
+      <div class="panel">
+        <h3>Choose your new card</h3>
+        <p class="small">This is a prototype. The card is added locally in the demo.</p>
+      </div>
+
+      <div class="theme-grid">
+        <button onclick="addCard('START')">START</button>
+        <button onclick="addCard('Y')">Y Elite</button>
+        <button onclick="addCard('X')">X Electric</button>
+        <button onclick="addCard('+')">+ Private</button>
+      </div>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="elite" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('home')">←</button>
+        <h2>Private Elite</h2>
+        <span></span>
+      </header>
+
+      <div class="terminal">
+        <p>STARTBANK CYBER SYSTEM</p>
+        <p>NODE: LUXEMBOURG</p>
+        <p>CHANNEL: cyber@punk.x</p>
+        <p>PHONE: +352 2880 494-1</p>
+        <p>STATUS: SECURED</p>
+      </div>
+
+      <button class="wide" onclick="fakeDone('Private Desk contacted')">Contact Private Desk</button>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <section id="settings" class="screen">
+      <header>
+        <button class="ghost" onclick="showScreen('home')">←</button>
+        <h2>Appearance</h2>
+        <span></span>
+      </header>
+
+      <div class="theme-grid">
+        <button onclick="setTheme('theme-neon')">Neon</button>
+        <button onclick="setTheme('theme-y')">Y Hacker</button>
+        <button onclick="setTheme('theme-x')">X Electric</button>
+        <button onclick="setTheme('theme-plus')">+ Deep Blue</button>
+      </div>
+
+      <div class="panel">
+        <h3>Theme system</h3>
+        <p>Personalise glow, cards, dashboard and private banking mode.</p>
+      </div>
+
+      <button class="wide ghost" onclick="showScreen('login')">Log out</button>
+
+      <bottom-nav></bottom-nav>
+    </section>
+
+    <div id="toast"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
